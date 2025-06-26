@@ -1,136 +1,161 @@
 import "./index.css";
- 
+
 console.log("Hello, world123");
- 
+
 document.addEventListener("DOMContentLoaded", function () {
   const yellowShapes = Array.from(
     document.querySelectorAll(
       'svg [fill="#F9EA3E"], svg [fill="#f9ea3e"], svg .cls-1, svg .cls-2',
     ),
-  );
+  ); // Selecteert alle gele SVG-elementen (gebaseerd op fill-kleur of klasse) en zet ze in een array.
+
   yellowShapes.forEach((el) => el.classList.add("yellow-anim"));
- 
+  // Voegt een animatieklasse toe aan elk geselecteerd geel element.
+
   for (let i = yellowShapes.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
+    // Loop om de volgorde van de shapes te schudden (Fisher-Yates shuffle).
+    const j = Math.floor(Math.random() * (i + 1)); // Kies een willekeurig index.
     [yellowShapes[i], yellowShapes[j]] = [yellowShapes[j], yellowShapes[i]];
+    // Verwissel de elementen.
   }
- 
+
   yellowShapes.forEach((shape, i) => {
+    // Loopt over elk geel element met index.
     setTimeout(() => {
-      shape.setAttribute("fill", "#000");
-      shape.classList.remove("cls-1", "cls-2");
-    }, i * 500);
+      shape.setAttribute("fill", "#000"); // Verandert de kleur van het element naar zwart.
+      shape.classList.remove("cls-1", "cls-2"); // Verwijdert specifieke klassen (indien aanwezig).
+    }, i * 500); // Wacht 500ms per element voor een trapgewijze overgang.
   });
 });
- 
+
 window.addEventListener("DOMContentLoaded", () => {
-  const wrapper = document.querySelector(".wrapper");
-  const homes = wrapper.querySelectorAll("#huis").length;
- 
+  // Wacht opnieuw op volledige HTML-laadstatus voor dit aparte blok.
+
+  const wrapper = document.querySelector(".wrapper"); // Selecteert de container met de klasse 'wrapper'.
+  const homes = wrapper.querySelectorAll("#huis").length; // Telt hoeveel elementen met ID 'huis' er zijn.
+
   if (homes >= 4) {
-    const secondsPerHome = 1.5;
-    const minDuration = 20;
-    const maxDuration = 60;
- 
-    let duration = homes * secondsPerHome;
-    duration = Math.max(minDuration, Math.min(duration, maxDuration));
- 
-    wrapper.style.animationDuration = `${duration}s`;
+    // Alleen als er 4 of meer huizen zijn.
+    const secondsPerHome = 1.5; // Berekent tijd per huis.
+    const minDuration = 20; // Minimale animatieduur in seconden.
+    const maxDuration = 60; // Maximale animatieduur in seconden.
+
+    let duration = homes * secondsPerHome; // Bereken de basisduur.
+    duration = Math.max(minDuration, Math.min(duration, maxDuration)); 
+    // Beperk de duur tot tussen min en max.
+
+    wrapper.style.animationDuration = `${duration}s`; // Zet de animatieduur op de wrapper.
   } else {
-    wrapper.style.animation = "none";
+    wrapper.style.animation = "none"; // Zet animatie uit als er minder dan 4 huizen zijn.
   }
 });
- 
-const tooltip = document.getElementById("tooltip");
-const links = document.querySelectorAll(".straat-link");
- 
+
+const tooltip = document.getElementById("tooltip"); // Selecteert het tooltip-element.
+const links = document.querySelectorAll(".straat-link"); // Selecteert alle straat-links.
+
 links.forEach((link) => {
-  const name = link.dataset.straat;
- 
+  const name = link.dataset.straat; // Haalt de naam van de straat op uit een data-attribuut.
+
   link.addEventListener("mouseenter", (e) => {
-    tooltip.style.display = "block";
-    tooltip.textContent = name;
+    tooltip.style.display = "block"; // Toon de tooltip als de muis erover gaat.
+    tooltip.textContent = name; // Zet de straatnaam als tekst in de tooltip.
   });
- 
+
   link.addEventListener("mouseleave", () => {
-    tooltip.style.display = "none";
+    tooltip.style.display = "none"; // Verberg de tooltip als de muis weggaat.
   });
- 
+
   link.addEventListener("mousemove", (e) => {
-    const mapWrapper = document.querySelector(".map-wrapper");
-    const rect = mapWrapper.getBoundingClientRect();
-    tooltip.style.left = e.clientX - rect.left + 10 + "px";
-    tooltip.style.top = e.clientY - rect.top - 10 + "px";
+    const mapWrapper = document.querySelector(".map-wrapper"); // Selecteer de map-container.
+    const rect = mapWrapper.getBoundingClientRect(); // Haalt de positie van de map-container op.
+
+    tooltip.style.left = e.clientX - rect.left + 10 + "px"; // Zet de horizontale positie van de tooltip.
+    tooltip.style.top = e.clientY - rect.top - 10 + "px"; // Zet de verticale positie van de tooltip.
   });
 });
- 
+
 gsap.from('svg[aria-label="introSVG"] path', {
-  drawSVG: 0,
-  duration: 30,
-  ease: "power1.inOut",
+  drawSVG: 0, // Start met niets getekend.
+  duration: 30, // Duurt 30 seconden.
+  ease: "power1.inOut", // Versnelling/vertragingseffect.
 });
- 
-const steps = document.querySelectorAll(".story-step");
-const overlay = document.getElementById("story-overlay");
-const title = document.querySelector(".story h1");
-const prevBtn = document.getElementById("prevBtn");
-let currentStep = 0;
- 
-function showStep(index) {
-  steps.forEach((step) => step.classList.remove("active"));
-  steps[index].classList.add("active");
- 
-  if (index === 0) {
-    title.style.display = "block";
-    prevBtn.style.display = "none";
+// Animeert een SVG-path alsof het met de hand getekend wordt (vereist GSAP + DrawSVGPlugin).
+
+// ======================
+// Added Localstage voor intro
+// ======================
+
+document.addEventListener("DOMContentLoaded", function () {
+  const overlay = document.querySelector(".overlay-screen");
+
+  const hasSeenStory = localStorage.getItem("hasSeenStory");
+
+  if (hasSeenStory) {
+    overlay.classList.add("hidden");
   } else {
-    title.style.display = "none";
-    prevBtn.style.display = "inline-block";
+    localStorage.setItem("hasSeenStory", "true");
+  }
+});
+
+const steps = document.querySelectorAll(".story-step"); // Selecteert alle stappen in het verhaal.
+const overlay = document.getElementById("story-overlay"); // Selecteert het overlay-element.
+const title = document.querySelector(".story h1"); // Selecteert de titel in de story-sectie.
+const prevBtn = document.getElementById("prevBtn"); // Selecteert de 'Vorige' knop.
+let currentStep = 0; // Houdt bij welke stap actief is.
+
+function showStep(index) {
+  steps.forEach((step) => step.classList.remove("active")); // Verberg alle stappen.
+  steps[index].classList.add("active"); // Toon de huidige stap.
+
+  if (index === 0) {
+    title.style.display = "block"; // Toon de titel bij stap 0.
+    prevBtn.style.display = "none"; // Verberg de vorige knop.
+  } else {
+    title.style.display = "none"; // Verberg de titel bij andere stappen.
+    prevBtn.style.display = "inline-block"; // Toon de vorige knop.
   }
 }
- 
+
 document.getElementById("nextBtn").addEventListener("click", () => {
   if (currentStep < steps.length - 1) {
-    currentStep++;
-    showStep(currentStep);
+    currentStep++; // Ga naar de volgende stap.
+    showStep(currentStep); // Toon de nieuwe stap.
   } else {
-    overlay.style.display = "none";
+    overlay.style.display = "none"; // Verberg het overlay als je aan het eind bent.
   }
 });
- 
+
 document.getElementById("prevBtn").addEventListener("click", () => {
   if (currentStep > 0) {
-    currentStep--;
-    showStep(currentStep);
+    currentStep--; // Ga terug naar de vorige stap.
+    showStep(currentStep); // Toon de stap.
   }
 });
- 
-showStep(currentStep);
- 
- 
+
+showStep(currentStep); // Toon de eerste stap bij het laden.
+
 document.querySelectorAll('.dropbtn').forEach(button => {
+  // Selecteer alle dropdown-knoppen.
   button.addEventListener('click', function (e) {
-      e.preventDefault();
-      const dropdown = this.nextElementSibling;
-      const isOpen = dropdown.style.display === 'block';
- 
+      e.preventDefault(); // Voorkom standaard klikgedrag.
+      const dropdown = this.nextElementSibling; // Haalt het menu op dat volgt na de knop.
+      const isOpen = dropdown.style.display === 'block'; // Controleer of menu al open is.
+
       document.querySelectorAll('.dropdown-content').forEach(menu => {
-          menu.style.display = 'none';
+          menu.style.display = 'none'; // Sluit alle dropdowns.
       });
- 
+
       if (!isOpen) {
-          dropdown.style.display = 'block';
+          dropdown.style.display = 'block'; // Open alleen als hij nog niet open was.
       }
   });
 });
- 
+
 document.addEventListener('click', function (e) {
+  // Klik buiten een dropdown sluit alle open dropdowns.
   if (!e.target.closest('.dropdown')) {
       document.querySelectorAll('.dropdown-content').forEach(menu => {
-          menu.style.display = 'none';
+          menu.style.display = 'none'; // Verberg elk menu.
       });
   }
 });
- 
- 
- 

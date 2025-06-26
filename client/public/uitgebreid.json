@@ -1,0 +1,34 @@
+{
+  "verhalen": [
+    {
+      "naam": "Oosterpark 13 – Familie Nerden",
+      "straat": "Oosterpark",
+      "huisnummer": 13,
+      "img": "/client/SVG/oosterpark13.svg"
+    },
+    {
+      "naam": "Vrolikstraat 160 – Familie Liefman",
+      "straat": "Vrolikstraat",
+      "huisnummer": 160,
+      "img": "/client/SVG/gezin5kids.svg"
+    },
+    {
+      "naam": "Oosterpark 13 – Familie Nerden",
+      "straat": "Oosterpark",
+      "huisnummer": 13,
+      "img": "/client/SVG/oosterpark13.svg"
+    },
+    {
+      "naam": "Oosterpark 13 – Familie Nerden",
+      "straat": "Oosterpark",
+      "huisnummer": 13,
+      "img": "/client/SVG/oosterpark13.svg"
+    },
+    {
+      "naam": "Oosterpark 13 – Familie Nerden",
+      "straat": "Oosterpark",
+      "huisnummer": 13,
+      "img": "/client/SVG/oosterpark13.svg"
+    }
+  ]
+}
