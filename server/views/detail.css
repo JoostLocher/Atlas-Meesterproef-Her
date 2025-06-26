@@ -764,6 +764,7 @@ strong {
   font-size: 1.5rem;
 }
 
+/* scroll omhoog button */
 
 .scroll-button {
   position: fixed;
@@ -797,12 +798,7 @@ strong {
   transform: translateY(-.25rem);
 }
 
-@media (min-width: 768px) {
-  /* .detail-footer {
-    padding: 1rem;
-  } */
-}
-
+/* footer verhaal pagina */
 
 .detail-footer {
   display: flex;

@@ -85,7 +85,7 @@ app.get("/verhaal/:naam", async (req, res) => {
     const persoon = storyData.personen.find((p) => p.naam === naam); // Zoekt de juiste persoon.
 
     if (!persoon) {
-      return res.status(404).send("Persoon niet gevonden"); // 404 bij niet gevonden.
+      return res.status(404).send("Persoon niet gevonden");
     }
 
     res.render("generic", {
@@ -93,7 +93,6 @@ app.get("/verhaal/:naam", async (req, res) => {
       familie: persoon.familie,
       beroep: persoon.beroep,
       verhaal: persoon.verhaal,
-      // straatnaam: persoon.straat || persoon.street || "onbekend", // of wat er beschikbaar is
     }); // Render de 'generic' template met persoonsgegevens.
   } catch (err) {
     console.error(err);
@@ -126,7 +125,7 @@ app.get("/:straatnaam/:huisnummer", async (req, res) => {
     );
 
     if (!adres) {
-      return res.status(404).send("Adres niet gevonden"); // Geen match? Geef 404.
+      return res.status(404).send("Adres niet gevonden");
     }
 
     // Zoek personen op dit adres

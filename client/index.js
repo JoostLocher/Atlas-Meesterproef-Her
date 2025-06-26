@@ -87,28 +87,28 @@ document.getElementById("prevBtn").addEventListener("click", () => {
 
 showStep(currentStep); // Toon de eerste stap bij het laden.
 
-document.querySelectorAll('.dropbtn').forEach(button => {
-  // Selecteer alle dropdown-knoppen.
-  button.addEventListener('click', function (e) {
-      e.preventDefault(); // Voorkom standaard klikgedrag.
-      const dropdown = this.nextElementSibling; // Haalt het menu op dat volgt na de knop.
-      const isOpen = dropdown.style.display === 'block'; // Controleer of menu al open is.
+// document.querySelectorAll('.dropbtn').forEach(button => {
+//   // Selecteer alle dropdown-knoppen.
+//   button.addEventListener('click', function (e) {
+//       e.preventDefault(); // Voorkom standaard klikgedrag.
+//       const dropdown = this.nextElementSibling; // Haalt het menu op dat volgt na de knop.
+//       const isOpen = dropdown.style.display === 'block'; // Controleer of menu al open is.
 
-      document.querySelectorAll('.dropdown-content').forEach(menu => {
-          menu.style.display = 'none'; // Sluit alle dropdowns.
-      });
+//       document.querySelectorAll('.dropdown-content').forEach(menu => {
+//           menu.style.display = 'none'; // Sluit alle dropdowns.
+//       });
 
-      if (!isOpen) {
-          dropdown.style.display = 'block'; // Open alleen als hij nog niet open was.
-      }
-  });
-});
+//       if (!isOpen) {
+//           dropdown.style.display = 'block'; // Open alleen als hij nog niet open was.
+//       }
+//   });
+// });
 
-document.addEventListener('click', function (e) {
-  // Klik buiten een dropdown sluit alle open dropdowns.
-  if (!e.target.closest('.dropdown')) {
-      document.querySelectorAll('.dropdown-content').forEach(menu => {
-          menu.style.display = 'none'; // Verberg elk menu.
-      });
-  }
-});
+// document.addEventListener('click', function (e) {
+//   // Klik buiten een dropdown sluit alle open dropdowns.
+//   if (!e.target.closest('.dropdown')) {
+//       document.querySelectorAll('.dropdown-content').forEach(menu => {
+//           menu.style.display = 'none'; // Verberg elk menu.
+//       });
+//   }
+// });

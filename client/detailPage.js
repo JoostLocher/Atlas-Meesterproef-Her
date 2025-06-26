@@ -554,6 +554,8 @@ gsap.fromTo(".end-text-generic",
 );
 
 
+// scroll button
+
 document.addEventListener("DOMContentLoaded", () => {
   const scrollBtn = document.getElementById("scroll-up-button");
   let lastScroll = window.scrollY;

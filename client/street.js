@@ -38,8 +38,6 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 });
 
-
-
 // window.addEventListener("DOMContentLoaded", () => {
 //   // Wacht opnieuw op volledige HTML-laadstatus voor dit aparte blok.
 
@@ -95,7 +93,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }, { passive: false });
 
   document.querySelectorAll('.huis').forEach((home) => {
-  home.setAttribute('tabindex', '0'); // focusable maken
+  home.setAttribute('tabindex', '0');
 
   home.addEventListener('focus', () => {
     paused = true;
