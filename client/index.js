@@ -2,53 +2,6 @@ import "./index.css";
 
 console.log("Hello, world123");
 
-document.addEventListener("DOMContentLoaded", function () {
-  const yellowShapes = Array.from(
-    document.querySelectorAll(
-      'svg [fill="#F9EA3E"], svg [fill="#f9ea3e"], svg .cls-1, svg .cls-2',
-    ),
-  ); // Selecteert alle gele SVG-elementen (gebaseerd op fill-kleur of klasse) en zet ze in een array.
-
-  yellowShapes.forEach((el) => el.classList.add("yellow-anim"));
-  // Voegt een animatieklasse toe aan elk geselecteerd geel element.
-
-  for (let i = yellowShapes.length - 1; i > 0; i--) {
-    // Loop om de volgorde van de shapes te schudden (Fisher-Yates shuffle).
-    const j = Math.floor(Math.random() * (i + 1)); // Kies een willekeurig index.
-    [yellowShapes[i], yellowShapes[j]] = [yellowShapes[j], yellowShapes[i]];
-    // Verwissel de elementen.
-  }
-
-  yellowShapes.forEach((shape, i) => {
-    // Loopt over elk geel element met index.
-    setTimeout(() => {
-      shape.setAttribute("fill", "#000"); // Verandert de kleur van het element naar zwart.
-      shape.classList.remove("cls-1", "cls-2"); // Verwijdert specifieke klassen (indien aanwezig).
-    }, i * 500); // Wacht 500ms per element voor een trapgewijze overgang.
-  });
-});
-
-window.addEventListener("DOMContentLoaded", () => {
-  // Wacht opnieuw op volledige HTML-laadstatus voor dit aparte blok.
-
-  const wrapper = document.querySelector(".wrapper"); // Selecteert de container met de klasse 'wrapper'.
-  const homes = wrapper.querySelectorAll("#huis").length; // Telt hoeveel elementen met ID 'huis' er zijn.
-
-  if (homes >= 4) {
-    // Alleen als er 4 of meer huizen zijn.
-    const secondsPerHome = 1.5; // Berekent tijd per huis.
-    const minDuration = 20; // Minimale animatieduur in seconden.
-    const maxDuration = 60; // Maximale animatieduur in seconden.
-
-    let duration = homes * secondsPerHome; // Bereken de basisduur.
-    duration = Math.max(minDuration, Math.min(duration, maxDuration)); 
-    // Beperk de duur tot tussen min en max.
-
-    wrapper.style.animationDuration = `${duration}s`; // Zet de animatieduur op de wrapper.
-  } else {
-    wrapper.style.animation = "none"; // Zet animatie uit als er minder dan 4 huizen zijn.
-  }
-});
 
 const tooltip = document.getElementById("tooltip"); // Selecteert het tooltip-element.
 const links = document.querySelectorAll(".straat-link"); // Selecteert alle straat-links.

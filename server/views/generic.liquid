@@ -2,6 +2,12 @@
 
 {% block content %}
 
+  <nav class="breadcrumbs">
+    <a href="/">Home</a> <span>></span>
+    <a href="/{{ straatnaam | url_encode }}">{{ straatnaam }}</a> <span>></span>
+    <span>{{ verhaal.straat }}</span>
+  </nav>
+
   <section class="scene-1">
     <h1 class="adress">{{ verhaal.straat }}</h1>
     <p class="family">{{ naam }}</p>
@@ -329,6 +335,12 @@
         </section>
   </section> 
 
+  <button id="scroll-up-button" class="scroll-button">↑ Terug naar boven</button>
+            
+  <footer class="detail-footer">
+    <a href="/{{ straatnaam | url_encode }}" class="footer-button">Terug naar {{ straat }}</a>
+    <a href="/" class="footer-button"> Terug naar overzicht</a>
+  </footer>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.3/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.3/ScrollTrigger.min.js"></script>

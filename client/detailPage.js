@@ -552,3 +552,25 @@ gsap.fromTo(".end-text-generic",
     }
   }
 );
+
+
+document.addEventListener("DOMContentLoaded", () => {
+  const scrollBtn = document.getElementById("scroll-up-button");
+  let lastScroll = window.scrollY;
+
+  window.addEventListener("scroll", () => {
+    const currentScroll = window.scrollY;
+
+    if (currentScroll < lastScroll && currentScroll > 100) {
+      scrollBtn.classList.add("visible");
+    } else {
+      scrollBtn.classList.remove("visible");
+    }
+
+    lastScroll = currentScroll;
+  });
+
+  scrollBtn.addEventListener("click", () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+});

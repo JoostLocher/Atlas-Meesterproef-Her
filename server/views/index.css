@@ -13,7 +13,7 @@
 
 .sidebar {
   background-color: var(--color-gray-70);
-  color: #212121;
+  color: var(--color-black);
 }
 
 .sidebar-content {
@@ -23,6 +23,11 @@
 }
 
 .sidebar-content h3 {
+  padding: 1rem 1rem 0 1rem;
+  margin: 0;
+}
+
+.sidebar-content p {
   padding: 1rem;
 }
 
@@ -372,13 +377,18 @@ h1 {
   overflow-y: hidden;
   scroll-snap-type: x mandatory;
   scroll-padding: 1rem;
+  padding: .5rem;
+  gap: .5rem;
   margin: 0;
 }
 
 .uitgelicht li {
   flex: 0 0 clamp(16rem, 20vw, 22rem);
   scroll-snap-align: start;
-  border: 1px solid #212121;
+  color: var(--color-black);
+  background-color: var(--color-yellow-mid);
+  border: 2px solid var(--color-gray-20);
+  border-radius: 1rem;
   height: auto;
   padding: 1rem;
   display: flex;
@@ -403,9 +413,8 @@ h1 {
 .uitgelicht li:hover,
 .uitgelicht li:focus-within {
   cursor: pointer;
-  background-color: var(--color-white);
   font-weight: bold;
-  border: 3px solid var(--color-yellow-mid);
+  border: 3px solid var(--color-black);
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
 }
 
@@ -479,4 +488,43 @@ h1 {
     padding: 1.2em;
     box-sizing: border-box;
   }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+
+  .overlay-screen svg path {
+    animation: none !important;
+    stroke-dasharray: none !important;
+    stroke-dashoffset: 0 !important;
+  }
+
+  .grid-wrapper,
+  .toggle-button svg,
+  .sidebar-content form li a,
+  .story-step {
+    transition: none !important;
+  }
+}
+
+
+.breadcrumbs {
+  font-size: 0.9rem;
+  padding: .5rem;
+  background-color: var(--color-gray-70);
+}
+
+.breadcrumbs a {
+  text-decoration: none;
+  color: var(--color-gray-20);
+  margin-right: 0.3rem;
+}
+
+.breadcrumbs span:last-of-type {
+  font-weight: bold;
+  color: var(--color-black);
 }
